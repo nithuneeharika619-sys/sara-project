@@ -1,39 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Sara Project</title>
-  <style>
-    body { 
-      background: #ffe6f0; 
-      text-align: center; 
-      font-family: Arial; 
-    }
-    h1 { color: #ff3399; margin-top: 80px; font-size: 40px; }
-    p { color: #333; font-size: 18px; }
-    .box {
-      background: white;
-      width: 300px;
-      margin: 30px auto;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 0 10px #ffb3d1;
-    }
-    button {
-      padding: 10px 20px;
-      background: #ff3399;
-      color: white;
-      border: none;
-      border-radius: 10px;
-    }
-  </style>
+<title>Sara Project 💖</title>
+<style>
+body { background: #fff0f5; text-align: center; font-family: Arial; padding-top: 80px; }
+h1 { color: #ff69b4; }
+.card { background: white; padding: 30px; border-radius: 15px; display: inline-block; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+button { background: #ff69b4; color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-size: 16px; }
+#sara { display: none; font-size: 24px; margin-top: 20px; }
+</style>
 </head>
 <body>
-  <h1>Sara Project 💖</h1>
-  <p>Created by Nithu</p>
-  <div class="box">
-    <h3>Hello World!</h3>
-    <p>Idi na first website</p>
-    <button>Click Me</button>
-  </div>
+<h1>Sara Project 💖</h1>
+<p>Created by Nithu</p>
+<div class="card">
+<p><b>Hello World!</b><br>Idi na first website</p>
+<button onclick="showSara()">Click Me</button>
+<div id="sara">Hi Nithu! Nenu Sara ni 💖✨</div>
+</div>
+<script>
+function showSara() {
+  document.getElementById("sara").style.display = "block";
+}
+</script>
 </body>
 </html>
