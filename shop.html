@@ -1,1 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sara Shopping 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body { font-family: Arial; background: #fff0f5; text-align: center; margin:0; padding:20px; }
+h1 { color: #ff69b4; }
+.card { background: white; border-radius: 20px; padding: 15px; margin: 15px auto; max-width: 300px; box-shadow: 0 4px 10px pink; }
+button { background: #ff69b4; color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; }
+button:hover { background: #ff1493; }
+#cart { margin-top: 20px; font-weight: bold; color: #ff1493; }
+</style>
+</head>
+<body>
+<h1>Sara's Cute Shop 🛒💖</h1>
+<p>Welcome Nithu! Your Shopping App is Live!</p>
 
+<div class="card">
+<h3>💄 Lipstick - Rs. 299</h3>
+<button onclick="addToCart('Lipstick')">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>👗 Dress - Rs. 999</h3>
+<button onclick="addToCart('Dress')">Add to Cart</button>
+</div>
+
+<div class="card">
+<h3>👜 Handbag - Rs. 599</h3>
+<button onclick="addToCart('Handbag')">Add to Cart</button>
+</div>
+
+<div id="cart">Cart: 0 items</div>
+<br>
+<a href="index.html">Back to Home</a>
+
+<script>
+let count = 0;
+function addToCart(item){
+ count++;
+ document.getElementById('cart').innerText = 'Cart: ' + count + ' items - Last added: ' + item + ' 💖';
+ alert(item + ' added to cart! 🥰');
+}
+</script>
+</body>
+</html>
