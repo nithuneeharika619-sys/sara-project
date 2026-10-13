@@ -1,1 +1,46 @@
-
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nithu Fashion Shopping Mall</title>
+<style>
+body{font-family:Arial;margin:0;background:#fff0f5}
+.header{background:#ff1493;color:white;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
+.cart-icon{background:white;color:#ff1493;padding:8px 15px;border-radius:20px;font-weight:bold;cursor:pointer}
+.products{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;padding:20px}
+.card{background:white;width:260px;border-radius:15px;box-shadow:0 4px 10px rgba(0,0,0,0.1);overflow:hidden;text-align:center;padding:15px 15px 15px 15px}
+.card img{width:100%;height:250px;object-fit:cover;border-radius:10px}
+.price{color:#ff1493;font-weight:bold;font-size:18px}
+.btn{background:#ff1493;color:white;border:none;padding:10px 20px;border-radius:25px;cursor:pointer;margin-top:8px;font-weight:bold;width:85%}
+.btn2{background:#ff9800}
+.btn3{background:#25D366}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>👗 Nithu Fashion Shopping Mall</h1>
+<div class="cart-icon" onclick="openCart()">🛒 Cart (<span id="cartCount">0</span>)</div>
+</div>
+<div class="products">
+<div class="card"><img src="https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?w=400"><h3>Pink Frock</h3><p class="price">Rs. 799</p><button class="btn" onclick="addToCart('Pink Frock',799)">Add to Cart</button><button class="btn btn2" onclick="buyNow('Pink Frock',799)">⚡ Buy Now</button></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=400"><h3>Designer Saree</h3><p class="price">Rs. 1299</p><button class="btn" onclick="addToCart('Designer Saree',1299)">Add to Cart</button><button class="btn btn2" onclick="buyNow('Designer Saree',1299)">⚡ Buy Now</button></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=400"><h3>Stylish Top</h3><p class="price">Rs. 599</p><button class="btn" onclick="addToCart('Stylish Top',599)">Add to Cart</button><button class="btn btn2" onclick="buyNow('Stylish Top',599)">⚡ Buy Now</button></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400"><h3>Blue Denim Dress</h3><p class="price">Rs. 999</p><button class="btn" onclick="addToCart('Blue Denim Dress',999)">Add to Cart</button><button class="btn btn2" onclick="buyNow('Blue Denim Dress',999)">⚡ Buy Now</button></div>
+</div>
+<div id="cartPage" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:white;z-index:200;padding:20px;overflow-y:auto;box-sizing:border-box">
+<h2>🛒 Your Cart</h2><div id="cartItems"></div><h3>Total: Rs. <span id="total">0</span></h3><button class="btn btn3" onclick="checkout()">📱 WhatsApp lo Order Chey</button><button class="btn" style="background:gray" onclick="closeCart()">Continue Shopping</button>
+</div>
+<script>
+let cart = JSON.parse(localStorage.getItem('nithuCart') || '[]');updateCount();
+function save(){localStorage.setItem('nithuCart', JSON.stringify(cart));}
+function updateCount(){document.getElementById('cartCount').innerText=cart.length;}
+function addToCart(name,price){cart.push({name,price});save();updateCount();alert(name+' Cart lo add ayindi!');}
+function buyNow(name,price){let msg=`Hi! Nithu Fashion Mall Buy Now:%0A- ${name} Rs.${price}%0A%0AAddress cheppandi`;window.open('https://wa.me/918712110761?text='+msg,'_blank');}
+function openCart(){document.getElementById('cartPage').style.display='block';let html='';let total=0;if(cart.length==0){html='<p>Cart empty</p>'}cart.forEach((item,i)=>{html+=`<div style="display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:10px"><span>${item.name} - Rs.${item.price}</span><span onclick="removeItem(${i})" style="color:red;cursor:pointer">❌</span></div>`;total+=item.price;});document.getElementById('cartItems').innerHTML=html;document.getElementById('total').innerText=total;}
+function closeCart(){document.getElementById('cartPage').style.display='none';}
+function removeItem(i){cart.splice(i,1);save();updateCount();openCart();}
+function checkout(){if(cart.length==0){alert('Cart empty!');return;}let msg='Hi! Nithu Fashion Mall Order:%0A';let total=0;cart.forEach(item=>{msg+=`- ${item.name} Rs.${item.price}%0A`;total+=item.price;});msg+=`Total: Rs.${total}%0A%0AAddress cheppandi`;window.open('https://wa.me/918712110761?text='+msg,'_blank');cart=[];save();updateCount();closeCart();}
+</script>
+</body>
+</html>
