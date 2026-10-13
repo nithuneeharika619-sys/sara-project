@@ -1,15 +1,41 @@
-let count=0;
-let items=[];
-function addtocart(item){
-count++;
-items.push(item);
-document.getelementbyid('cart').innertexr=cart:'+count;
-document.getelementbyid('orderBtb').style.display='block';
-alert(item+'added|total:'+count):
-}
-function orderWhatApp(){
-let phone="";
-let msg="Hello|Iwant to order:%0A"+item.join("%0A")+"%0Atotal:"+count;
-window.open("https:/)wa.me/"+phone+"!text=+msg,"_blank");
-}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sara Fashion - Beautiful Dresses</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{font-family:Arial; background:#fff0f6; margin:0; padding:0;}
+.header{background:#ff4d94; color:white; padding:20px; text-align:center; font-size:28px; font-weight:bold;}
+.container{padding:20px; display:flex; flex-wrap:wrap; justify-content:center; gap:20px;}
+.card{background:white; border-radius:15px; width:250px; padding:15px; box-shadow:0 4px 10px rgba(0,0,0,0.1); text-align:center;}
+.card img{width:100%; border-radius:10px; height:250px; object-fit:cover;}
+.card h3{color:#ff4d94; margin:10px 0 5px;}
+.price{color:green; font-weight:bold; font-size:18px;}
+.btn{background:#ff4d94; color:white; border:none; padding:10px 15px; border-radius:20px; cursor:pointer; margin-top:10px; width:100%;}
+.btn:hover{background:#e6005c;}
+</style>
+</head>
+<body>
+<div class="header">Sara Fashion World 👗</div>
+<div class="container">
+<div class="card">
+<img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400">
+<h3>Pink Frock</h3>
+<div class="price">Rs. 799</div>
+<button class="btn">Add to Cart</button>
+</div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400">
+<h3>Designer Saree</h3>
+<div class="price">Rs. 1299</div>
+<button class="btn">Add to Cart</button>
+</div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=400">
+<h3>Stylish Top</h3>
+<div class="price">Rs. 599</div>
+<button class="btn">Add to Cart</button>
+</div>
+</div>
 </body>
+</html>
