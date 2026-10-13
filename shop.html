@@ -3,11 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sara Fashion World - Shopping</title>
+<title>Sara Fashion World</title>
 <style>
 body{font-family:Arial;margin:0;background:#fff0f5}
 .header{background:#ff1493;color:white;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
-.header h1{margin:0;font-size:20px}
 .cart-icon{background:white;color:#ff1493;padding:8px 15px;border-radius:20px;font-weight:bold;cursor:pointer}
 .products{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;padding:20px}
 .card{background:white;width:260px;border-radius:15px;box-shadow:0 4px 10px rgba(0,0,0,0.1);overflow:hidden;text-align:center;padding-bottom:15px}
@@ -16,17 +15,15 @@ body{font-family:Arial;margin:0;background:#fff0f5}
 .btn{background:#ff1493;color:white;border:none;padding:10px 20px;border-radius:25px;cursor:pointer;margin-top:10px;font-weight:bold;width:80%}
 .btn:hover{background:#c80064}
 .btn2{background:#25D366}
-#cartPage{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:white;z-index:200;padding:20px;overflow-y:auto}
+#cartPage{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:white;z-index:200;padding:20px;overflow-y:auto;box-sizing:border-box}
 .cart-item{display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:10px}
 </style>
 </head>
 <body>
-
 <div class="header">
 <h1>👗 Sara Fashion World</h1>
 <div class="cart-icon" onclick="openCart()">🛒 Cart (<span id="cartCount">0</span>)</div>
 </div>
-
 <div class="products">
 <div class="card">
 <img src="https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?w=400">
@@ -47,7 +44,6 @@ body{font-family:Arial;margin:0;background:#fff0f5}
 <button class="btn" onclick="addToCart('Stylish Top',599)">Add to Cart</button>
 </div>
 </div>
-
 <div id="cartPage">
 <h2>🛒 Your Cart</h2>
 <div id="cartItems"></div>
@@ -55,33 +51,35 @@ body{font-family:Arial;margin:0;background:#fff0f5}
 <button class="btn btn2" onclick="checkout()">📱 WhatsApp lo Order Chey</button>
 <button class="btn" style="background:gray" onclick="closeCart()">Continue Shopping</button>
 </div>
-
 <script>
-let cart=[];
+let cart = JSON.parse(localStorage.getItem('saraCart') || '[]');
+updateCount();
+function save(){localStorage.setItem('saraCart', JSON.stringify(cart));}
+function updateCount(){document.getElementById('cartCount').innerText=cart.length;}
 function addToCart(name,price){
- cart.push({name,price});
- document.getElementById('cartCount').innerText=cart.length;
- alert(name+' Cart lo add ayindi!');
+ cart.push({name,price}); save(); updateCount();
+ alert(name+' Cart lo add ayindi! Cart lo '+cart.length+' items unnayi');
 }
 function openCart(){
  document.getElementById('cartPage').style.display='block';
  let html=''; let total=0;
+ if(cart.length==0){html='<p>Cart empty - Mundhu Add to Cart click chey Nithu!</p>'}
  cart.forEach((item,i)=>{
    html+=`<div class="cart-item"><span>${item.name} - Rs.${item.price}</span><span onclick="removeItem(${i})" style="color:red;cursor:pointer">❌</span></div>`;
    total+=item.price;
  });
- document.getElementById('cartItems').innerHTML= html || '<p>Cart empty</p>';
+ document.getElementById('cartItems').innerHTML=html;
  document.getElementById('total').innerText=total;
 }
 function closeCart(){document.getElementById('cartPage').style.display='none';}
-function removeItem(i){cart.splice(i,1);document.getElementById('cartCount').innerText=cart.length;openCart();}
+function removeItem(i){cart.splice(i,1);save();updateCount();openCart();}
 function checkout(){
- if(cart.length==0){alert('Cart empty Nithu!');return;}
- let msg='Hi Nithu! Nenu order cheyali:%0A';
- let total=0;
+ if(cart.length==0){alert('Cart empty Nithu! Mundhu Add to Cart chey');return;}
+ let msg='Hi Nithu! Order:%0A'; let total=0;
  cart.forEach(item=>{msg+=`- ${item.name} Rs.${item.price}%0A`; total+=item.price;});
- msg+=`Total: Rs.${total}`;
+ msg+=`Total: Rs.${total}%0A%0AAddress cheppandi`;
  window.open('https://wa.me/918712110761?text='+msg,'_blank');
+ cart=[]; save(); updateCount(); closeCart();
 }
 </script>
 </body>
